@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import se331.lab.rest.entity.Event;
 import java.util.ArrayList;
 import java.util.List;
-import se331.lab.rest.entity.Organizer;
+
 @Repository
 @Profile("manual")
 public class EventDaoImpl implements EventDao {
@@ -107,5 +107,15 @@ public class EventDaoImpl implements EventDao {
         return eventList.stream().filter(event->
                 event.getId().equals(id)).findFirst().orElse(null);
     }
+
+
+    @Override
+    public Event save(Event event) {
+        event.setId(eventList.get(eventList.size() - 1).getId() + 1);
+        eventList.add(event);
+        return event;
+    }
+
+
 
 }

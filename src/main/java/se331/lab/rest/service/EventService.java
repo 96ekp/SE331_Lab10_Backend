@@ -11,5 +11,7 @@ public interface EventService {
     public Integer getEventSize();
     public Page<Event> getEvents(Integer pageSize, Integer page);
     public Event getEvent(Long id);
+    Event save(Event event);
+
 
 }

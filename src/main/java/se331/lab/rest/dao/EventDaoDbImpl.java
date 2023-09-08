@@ -21,7 +21,12 @@ public class EventDaoDbImpl implements EventDao {
 
     @Override
     public Page<Event> getEvents(Integer pageSize, Integer page) {
-        return eventRepository.findAll(PageRequest.of(page - 1, pageSize));
+        if (page != null) {
+            return eventRepository.findAll(PageRequest.of(page - 1, pageSize));
+        } else {
+            // Handle the case where "page" is null, e.g., return the first page by default
+            return eventRepository.findAll(PageRequest.of(0, pageSize));
+        }
     }
 
 

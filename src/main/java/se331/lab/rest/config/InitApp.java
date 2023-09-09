@@ -6,11 +6,14 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 import se331.lab.rest.entity.Event;
 import se331.lab.rest.repository.EventRepository;
+import se331.lab.rest.entity.Organizer;
+import se331.lab.rest.repository.OrganizerRepository;
 
 @Component
 @RequiredArgsConstructor
 public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
     final EventRepository eventRepository;
+    final OrganizerRepository organizerRepository;
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
@@ -50,5 +53,55 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
                 .time("10.00am - 6.00 pm.")
                 .petAllowed(true)
                 .organizer("Chiang Mai Municipality").build());
+
+
+        // organizers
+        organizerRepository.save(Organizer.builder()
+                .id(1L)
+                .organizationName("Sheila Mosley")
+                .address("9191 Corona Court " + "Champlin, MN 55316")
+                .build());
+        organizerRepository.save(Organizer.builder()
+                .id(2L)
+                .organizationName("Violet French")
+                .address("7430 Deerfield Circle " + "Mechanicsburg, PA 17050")
+                .build());
+        organizerRepository.save(Organizer.builder()
+                .id(3L)
+                .organizationName("Rahul Porter")
+                .address("176 Maiden St. " + "Whitehall, PA 18052")
+                .build());
+        organizerRepository.save(Organizer.builder()
+                .id(4L)
+                .organizationName("Padraig James")
+                .address("586 Washington St. " + "Newark, NJ 07103")
+                .build());
+        organizerRepository.save(Organizer.builder()
+                .id(5L)
+                .organizationName("Shoaib Morse")
+                .address("7610 Westminster Lane " + "Vincentown, NJ 08088")
+                .build());
+        organizerRepository.save(Organizer.builder()
+                .id(6L)
+                .organizationName("Siena Mcdonnell")
+                .address("9107 Swanson Street " + "Worcester, MA 01604")
+                .build());
+        organizerRepository.save(Organizer.builder()
+                .id(7L)
+                .organizationName("Mirza Russo")
+                .address("7843 Forest St. " + "Fernandina Beach, FL 32034")
+                .build());
+        organizerRepository.save(Organizer.builder()
+                .id(8L)
+                .organizationName("Tyler-James Preece")
+                .address("8638 Oak Meadow St. " + "Port Saint Lucie, FL 34952")
+                .build());
+        organizerRepository.save(Organizer.builder()
+                .id(9L)
+                .organizationName("Haseeb Justice")
+                .address("92 W. Foster Court " + "Warminster, PA 18974")
+                .build());
+
+
     }
 }

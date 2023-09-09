@@ -19,8 +19,7 @@ import se331.lab.rest.service.EventService;
 @Controller
 @RequiredArgsConstructor
 public class EventController {
-    @Autowired
-    EventService eventService;
+   private final  EventService eventService;
     @GetMapping("events")
     public ResponseEntity<?> getEventLists(
             @RequestParam(value = "_limit", required = false) Integer perPage,

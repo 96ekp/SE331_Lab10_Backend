@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import se331.lab.rest.entity.Event;
 import se331.lab.rest.repository.EventRepository;
 
+import static org.springframework.beans.support.PagedListHolder.DEFAULT_PAGE_SIZE;
+
 @Repository
 @RequiredArgsConstructor
 @Profile("db")
@@ -21,11 +23,11 @@ public class EventDaoDbImpl implements EventDao {
 
     @Override
     public Page<Event> getEvents(Integer pageSize, Integer page) {
-        if (page != null) {
+        if (page != null && pageSize != null) {
             return eventRepository.findAll(PageRequest.of(page - 1, pageSize));
         } else {
             // Handle the case where "page" is null, e.g., return the first page by default
-            return eventRepository.findAll(PageRequest.of(0, pageSize));
+            return eventRepository.findAll(PageRequest.of(0, pageSize != null? pageSize : DEFAULT_PAGE_SIZE));
         }
     }
 
@@ -34,6 +36,9 @@ public class EventDaoDbImpl implements EventDao {
     public Event getEvent(Long id) {
         return eventRepository.findById(id).orElse(null);
     }
+
+
+
 
     @Override
    public Event save(Event event) {

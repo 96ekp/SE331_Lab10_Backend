@@ -1,6 +1,7 @@
 package se331.lab.rest.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,8 @@ import se331.lab.rest.service.EventService;
 @Controller
 @RequiredArgsConstructor
 public class EventController {
-    final EventService eventService;
+    @Autowired
+    EventService eventService;
     @GetMapping("events")
     public ResponseEntity<?> getEventLists(
             @RequestParam(value = "_limit", required = false) Integer perPage,

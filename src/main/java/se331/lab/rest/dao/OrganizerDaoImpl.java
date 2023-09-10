@@ -1,14 +1,13 @@
 package se331.lab.rest.dao;
 
 import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 import se331.lab.rest.entity.Organizer;
-import se331.lab.rest.repository.OrganizerRepository;
+
 
 import java.util.ArrayList;
 import java.util.List;

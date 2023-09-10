@@ -5,33 +5,45 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
+import se331.lab.rest.entity.Event;
 import se331.lab.rest.entity.Organizer;
 import se331.lab.rest.repository.OrganizerRepository;
+
+import static org.springframework.beans.support.PagedListHolder.DEFAULT_PAGE_SIZE;
 
 @Repository
 @Profile("db")
 public class OrganizerDaoDbImpl implements OrganizerDao {
     @Autowired
-    OrganizerRepository organizerRepo;
+    OrganizerRepository organizerRepository;
     @Override
     public Integer getOrganizerSize() {
-        return Math.toIntExact(organizerRepo.count());
+        return Math.toIntExact(organizerRepository.count());
     }
 
-    @Override
-    public Page<Organizer> getOrganizers(Integer pageSize, Integer page) {
-        return organizerRepo.findAll(PageRequest.of(page - 1, pageSize));
+//    @Override
+//    public Page<Organizer> getOrganizers(Integer pageSize, Integer page) {
+//        return organizerRepository.findAll(PageRequest.of(page - 1, pageSize));
+//    }
+@Override
+public Page<Organizer> getOrganizers(Integer pageSize, Integer page) {
+    if (page != null && pageSize != null) {
+        return organizerRepository.findAll(PageRequest.of(page - 1, pageSize));
+    } else {
+        // Handle the case where "page" is null, e.g., return the first page by default
+        return organizerRepository.findAll(PageRequest.of(0, pageSize != null? pageSize : DEFAULT_PAGE_SIZE));
     }
+}
 
     @Override
     public Organizer getOrganizer(Long id) {
-        return organizerRepo.findById(id).orElse(null);
+        return organizerRepository.findById(id).orElse(null);
     }
 
 
     @Override
     public Organizer save(Organizer organizer) {
-        return organizerRepo.save(organizer);
+        return organizerRepository.save(organizer);
     }
 
 

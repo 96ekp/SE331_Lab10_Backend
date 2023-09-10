@@ -19,20 +19,24 @@ import se331.lab.rest.service.OrganizerService;
 @Controller
 @RequiredArgsConstructor
 public class OrganizerController {
-    private final OrganizerService organizerService;
+    @Autowired
+    OrganizerService organizerService;
     @GetMapping("organizers")
-    public ResponseEntity<?> getOrganizerLists(
-            @RequestParam(value = "_limit", required = false) Integer perPage,
-            @RequestParam(value= "_page", required = false) Integer page) {
-
-        Page<Organizer> pageOutput = organizerService.getOrganizers(perPage, page);
+    public ResponseEntity<?> getOrganizerLists(@RequestParam(value = "_limit",
+            required = false)Integer perPage
+            , @RequestParam(value = "_page", required = false)Integer page) {
+        Page<Organizer> output = null;
+        Integer eventSize = organizerService.getOrganizerSize();
         HttpHeaders responseHeader = new HttpHeaders();
-        responseHeader.set("x-total-count", String.valueOf(pageOutput.getTotalElements()));
-        return new
-                ResponseEntity<>(pageOutput.getContent(), responseHeader, HttpStatus.OK);
-
+        responseHeader.set("x-total-count", String.valueOf(eventSize));
+        try {
+            output = organizerService.getOrganizers(perPage, page);
+            return new ResponseEntity<>(output, responseHeader, HttpStatus.OK);
+        } catch (IndexOutOfBoundsException ex) {
+            return new ResponseEntity<>(output, responseHeader, HttpStatus.OK);
+        }
     }
-    @GetMapping("organizer/{id}")
+    @GetMapping("organizers/{id}")
     public ResponseEntity<?> getOrganizer(@PathVariable("id") Long id) {
         Organizer output = organizerService.getOrganizer(id);
         if(output != null) {
@@ -42,7 +46,7 @@ public class OrganizerController {
         }
     }
 
-    @PostMapping("/organizer")
+    @PostMapping("/organizers")
     public ResponseEntity<?> addOrganizer(@RequestBody Organizer organizer) {
         Organizer output = organizerService.save(organizer);
         return ResponseEntity.ok(output);

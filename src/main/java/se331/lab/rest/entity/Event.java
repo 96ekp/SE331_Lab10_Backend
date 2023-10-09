@@ -7,6 +7,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @Builder
 @Entity
@@ -24,6 +26,8 @@ public class Event {
     String date;
     String time;
     Boolean petAllowed;
-    String organizer;
+
+    Organizer organizer;
+    List<Participant> participants;
 
 }

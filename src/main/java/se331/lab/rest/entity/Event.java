@@ -26,8 +26,6 @@ public class Event {
     String date;
     String time;
     Boolean petAllowed;
-
-    Organizer organizer;
-    List<Participant> participants;
+    String organizer;
 
 }

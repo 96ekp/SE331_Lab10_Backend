@@ -1,12 +1,13 @@
-//package se331.lab.rest.service;
-//import org.springframework.data.domain.Page;
-//import org.springframework.stereotype.Service;
-//import se331.lab.rest.entity.Organizer;
-//
-//@Service
-//public interface OrganizerService {
-//    public Integer getOrganizerSize();
-//    public Page<Organizer> getOrganizers(Integer pageSize, Integer page);
-//    public Organizer getOrganizer(Long id);
-//    Organizer save(Organizer organizer);
-//}
+package se331.lab.rest.service;
+
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+
+import se331.lab.rest.entity.Organizer;
+
+public interface OrganizerService {
+    List<Organizer> getAllOrganizer();
+
+    Page<Organizer> getOrganizer(Integer page, Integer pageSize);
+}

@@ -3,6 +3,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
 import java.util.ArrayList;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+
 
 @Data
 @Builder

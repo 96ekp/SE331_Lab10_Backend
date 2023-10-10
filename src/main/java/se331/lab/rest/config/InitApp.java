@@ -1,5 +1,6 @@
 package se331.lab.rest.config;
 
+
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import se331.lab.rest.entity.Event;
 import se331.lab.rest.repository.EventRepository;
 import se331.lab.rest.entity.Organizer;
 import se331.lab.rest.repository.OrganizerRepository;
+
 
 import java.beans.Transient;
 

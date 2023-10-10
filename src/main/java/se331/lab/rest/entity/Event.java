@@ -1,9 +1,8 @@
 package se331.lab.rest.entity;
-
-
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
+import java.util.ArrayList;
 
 @Data
 @Builder
@@ -15,8 +14,6 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Exclude
-
-
     Long id;
     String category;
     String title;
@@ -28,6 +25,7 @@ public class Event {
     @ManyToOne
     Organizer organizer;
     @ManyToMany(mappedBy = "eventHistory")
-    List<Participant> participants;
+            @Builder.Default
+    List<Participant> participants = new ArrayList<>();
 
 }

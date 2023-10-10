@@ -21,14 +21,18 @@ public class EventDaoDbImpl implements EventDao {
         return Math.toIntExact(eventRepository.count());
     }
 
+//    @Override
+//    public Page<Event> getEvents(Integer pageSize, Integer page) {
+//        if (page != null && pageSize != null) {
+//            return eventRepository.findAll(PageRequest.of(page - 1, pageSize));
+//        } else {
+//            // Handle the case where "page" is null, e.g., return the first page by default
+//            return eventRepository.findAll(PageRequest.of(0, pageSize != null? pageSize : DEFAULT_PAGE_SIZE));
+//        }
+//    }
     @Override
     public Page<Event> getEvents(Integer pageSize, Integer page) {
-        if (page != null && pageSize != null) {
-            return eventRepository.findAll(PageRequest.of(page - 1, pageSize));
-        } else {
-            // Handle the case where "page" is null, e.g., return the first page by default
-            return eventRepository.findAll(PageRequest.of(0, pageSize != null? pageSize : DEFAULT_PAGE_SIZE));
-        }
+        return eventRepository.findAll(PageRequest.of(page-1,pageSize));
     }
 
 

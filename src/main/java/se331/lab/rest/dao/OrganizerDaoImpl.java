@@ -1,5 +1,5 @@
 package se331.lab.rest.dao;
-
+// 6.5
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -20,6 +20,7 @@ public class OrganizerDaoImpl implements OrganizerDao {
         return organizerRepository.findAll(pageRequest);
     }
 
+    // 6.5
     @Override
     public Optional<Organizer> findById(Long id) {
         return organizerRepository.findById(id);

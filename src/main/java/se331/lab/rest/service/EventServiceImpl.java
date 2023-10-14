@@ -5,12 +5,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import se331.lab.rest.dao.EventDao;
 import se331.lab.rest.entity.Event;
+// 6.5
+import jakarta.transaction.Transactional;
+import se331.lab.rest.dao.OrganizerDao;
+import se331.lab.rest.entity.Organizer;
 
 
 @Service
 public class EventServiceImpl implements EventService {
     @Autowired
     EventDao eventDao;
+    @Autowired
+    OrganizerDao organizerDao;
 
     @Override
     public Integer getEventSize() {
@@ -19,6 +25,7 @@ public class EventServiceImpl implements EventService {
 
 
     @Override
+
     public Page<Event> getEvents(Integer pageSize, Integer page) {
         return eventDao.getEvents(pageSize, page);
     }
@@ -30,8 +37,12 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    @Transactional
     public Event save(Event event) {
-                return eventDao.save(event);
+        Organizer organizer = organizerDao.findById(event.getOrganizer().getId()).orElse(null);
+        event.setOrganizer(organizer);
+        organizer.getOwnEvents().add(event);
+        return eventDao.save(event);
             }
 
 

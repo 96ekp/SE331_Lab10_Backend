@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import se331.lab.rest.entity.Event;
 import se331.lab.rest.entity.Organizer;
@@ -118,6 +119,15 @@ public class EventDaoImpl implements EventDao {
         return event;
     }
 
+    /**
+     * @param title
+     * @param pageable
+     * @return
+     */
+    @Override
+    public Page<Event> getEvents(String title, Pageable pageable) {
+        return null;
+    }
 
 
 }

@@ -11,7 +11,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @ComponentScan("se331.lab.rest")
 public class Application {
 
-	public static void main(String[] args) {
+	/**
+	 * @param args
+	 */
+	public static void main(java.lang.String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
 
@@ -20,14 +23,13 @@ public class Application {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-//                registry.addMapping("/events").allowedOrigins("http://localhost:3000");
-//                registry.addMapping("/events/*").allowedOrigins("http://localhost:3000");
+				// registry.addMapping("/events").allowedOrigins("http://localhost:3000");
+				// registry.addMapping("/events/*").allowedOrigins("http://localhost:3000");
 				// make it look more easier
 				registry.addMapping("/**").allowedOrigins("http://localhost:3000")
 						.exposedHeaders("x-total-count");
 			}
 		};
 	}
-
 
 }
